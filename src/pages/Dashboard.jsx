@@ -1,4 +1,3 @@
-// src/pages/Dashboard.jsx
 import React, { useState, useEffect, useMemo } from "react";
 import { toast } from "sonner";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
@@ -13,6 +12,8 @@ import { useAuth } from "../context/AuthContext";
 import { ApplicationStatus } from "../constants/ApplicationStatus";
 import { statusColors } from "../constants/statusColors";
 import { fetchJobs, createJob, updateJob, deleteJob } from "../api/jobsApi";
+
+import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
   const { user, token, logout } = useAuth();
@@ -34,7 +35,7 @@ const Dashboard = () => {
   const [sortConfig, setSortConfig] = useState({ key: "date", direction: "desc" });
   const [viewMode, setViewMode] = useState("table"); // "table" | "kanban"
 
-  // Fetch jobs on mount
+  // Fetch jobs
   useEffect(() => {
     if (!token) return;
 
@@ -53,14 +54,14 @@ const Dashboard = () => {
     loadJobs();
   }, [token]);
 
-  // Filtered jobs based on status
-  const filteredJobs = useMemo(() => {
-    return statusFilter === "all"
-      ? jobs
-      : jobs.filter(j => j.status === statusFilter);
-  }, [jobs, statusFilter]);
+  const filteredJobs = useMemo(() =>
+    statusFilter === "all" ? jobs : jobs.filter(j => j.status === statusFilter),
+    [jobs, statusFilter]
+  );
 
-  // Sorting
+  const totalJobs = jobs.length;
+  const filteredCount = filteredJobs.length;
+
   const handleSort = key =>
     setSortConfig(prev => ({
       key,
@@ -73,7 +74,7 @@ const Dashboard = () => {
   const handleView = job => { setViewJob(job); setIsViewModalOpen(true); };
   const handleDeleteClick = job => { setJobToDeleteId(job?._id || null); setIsConfirmModalOpen(true); };
 
-  // Save job (create or update)
+  // Save job
   const handleSave = async job => {
     setLoadingSave(true);
     try {
@@ -82,9 +83,7 @@ const Dashboard = () => {
         : await createJob(token, job);
 
       setJobs(prev =>
-        editingJob
-          ? prev.map(j => (j._id === savedJob._id ? savedJob : j))
-          : [savedJob, ...prev]
+        editingJob ? prev.map(j => (j._id === savedJob._id ? savedJob : j)) : [savedJob, ...prev]
       );
 
       toast.success(editingJob ? "Job updated successfully" : "Job added successfully");
@@ -97,7 +96,7 @@ const Dashboard = () => {
     }
   };
 
-  // Confirm deletion
+  // Delete job
   const handleConfirmDelete = async () => {
     if (!jobToDeleteId) return toast.error("No job selected");
     setLoadingDelete(true);
@@ -131,7 +130,6 @@ const Dashboard = () => {
       await updateJob(token, { ...job, status: destination.droppableId });
     } catch (err) {
       toast.error(err.message);
-      // rollback on failure
       setJobs(prev => prev.map(j => (j._id === draggableId ? job : j)));
     }
   };
@@ -144,19 +142,22 @@ const Dashboard = () => {
         {/* View Mode & Filter */}
         <div className="flex justify-between items-center my-4 flex-wrap gap-2">
           <div className="flex gap-2">
-            <button
+            <Button
+              className={viewMode === "table" ? "text-black" : "hover:scale-110"}
               onClick={() => setViewMode("table")}
-              className={`px-4 py-2 rounded ${viewMode === "table" ? "bg-blue-600" : "bg-gray-800"}`}
+              variant={viewMode === "table" ? "secondary" : "ghost"}
             >
               Table View
-            </button>
-            <button
+            </Button>
+            <Button
+              className={viewMode === "kanban" ? "text-black" : "hover:scale-110"}
               onClick={() => setViewMode("kanban")}
-              className={`px-4 py-2 rounded ${viewMode === "kanban" ? "bg-blue-600" : "bg-gray-800"}`}
+              variant={viewMode === "kanban" ? "secondary" : "ghost"}
             >
               Kanban View
-            </button>
+            </Button>
           </div>
+          
 
           <div className="flex items-center gap-2">
             <label className="text-sm font-medium text-gray-400 mr-2">Filter by status:</label>
@@ -172,6 +173,9 @@ const Dashboard = () => {
             </select>
           </div>
         </div>
+
+        
+        
 
         {loadingJobs ? (
           <div className="text-center py-16 text-gray-400">
@@ -241,6 +245,15 @@ const Dashboard = () => {
           </DragDropContext>
         )}
       </div>
+
+      <div className="fixed bottom-4 right-6 text-gray-200 px-4 py-2 rounded-lg shadow-md text-sm">
+        <div>Total Job Applications: <span className="text-indigo-500"> {totalJobs} </span> </div>
+        {statusFilter !== "all" && (
+          <div>Filtered: <span className="text-indigo-500"> {filteredCount} </span> </div>
+        )}
+      </div>
+
+      
 
       {/* Modals */}
       {isAddEditModalOpen && (
