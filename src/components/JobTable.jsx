@@ -68,7 +68,7 @@ const JobTable = ({ jobs, onEdit, onDelete, onView, onSort, sortConfig }) => {
         <tbody className="divide-y divide-gray-700">
           {jobs.map(job => (
             <tr
-              key={job.id}
+              key={job._id}
               className="transition-colors duration-150 even:bg-gray-900/40 hover:bg-gray-800"
             >
               <td className="p-4 font-medium">{job.company}</td>
@@ -115,7 +115,7 @@ const JobTable = ({ jobs, onEdit, onDelete, onView, onSort, sortConfig }) => {
                     <EditIcon />
                   </button>
                   <button
-                    onClick={() => onDelete(job.id)}
+                    onClick={() => onDelete(job)}
                     className="p-2 text-red-400 hover:text-red-300 hover:bg-gray-700 rounded-full transform transition-all duration-150 hover:scale-110"
                     aria-label={`Delete application for ${job.title} at ${job.company}`}
                   >

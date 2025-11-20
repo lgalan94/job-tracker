@@ -59,22 +59,35 @@ const Dashboard = () => {
   const handleEdit = job => { setEditingJob(job); setIsAddEditModalOpen(true); };
   const handleView = job => { setViewJob(job); setIsViewModalOpen(true); };
 
-  const handleConfirmDelete = async () => {
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/jobs/${jobToDeleteId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!res.ok) throw new Error("Failed to delete job");
-      setJobs(jobs.filter(j => j._id !== jobToDeleteId));
-      toast.success("Job deleted successfully");
-    } catch (err) {
-      toast.error(err.message);
-    } finally {
-      setIsConfirmModalOpen(false);
-      setJobToDeleteId(null);
-    }
-  };
+const handleConfirmDelete = async () => {
+  if (!jobToDeleteId) {
+    toast.error("No job selected");
+    return;
+  }
+
+  console.log("Deleting job with ID:", jobToDeleteId);
+
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/jobs/${jobToDeleteId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data?.error || "Failed to delete job");
+
+    // Remove from list
+    setJobs(prev => prev.filter(j => j._id !== jobToDeleteId));
+    toast.success("Job deleted successfully");
+  } catch (err) {
+    toast.error(err.message);
+  } finally {
+    setIsConfirmModalOpen(false);
+    setJobToDeleteId(null);
+  }
+};
+
+
 
   const handleSave = async job => {
     try {
@@ -132,14 +145,21 @@ const Dashboard = () => {
         </div>
 
         {/* Job Table */}
-        <JobTable
+       <JobTable
           jobs={filteredAndSortedJobs}
           onEdit={handleEdit}
-          onDelete={id => { setJobToDeleteId(id); setIsConfirmModalOpen(true); }}
+          
+          
+          onDelete={(job) => {
+          setJobToDeleteId(job?._id || null);
+          setIsConfirmModalOpen(true);
+        }}
+
           onView={handleView}
           onSort={handleSort}
           sortConfig={sortConfig}
         />
+
       </div>
 
       {/* Modals */}
