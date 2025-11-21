@@ -35,6 +35,8 @@ const Dashboard = () => {
   const [sortConfig, setSortConfig] = useState({ key: "date", direction: "desc" });
   const [viewMode, setViewMode] = useState("table"); // "table" | "kanban"
 
+
+  if (!user) return null; // Optional: prevent rendering blank content before redirect
   // Fetch jobs
   useEffect(() => {
     if (!token) return;
@@ -253,17 +255,26 @@ const Dashboard = () => {
         )}
       </div>
 
-      <div className="fixed bottom-4 right-6 text-gray-200 px-4 py-2 rounded-lg shadow-md text-sm">
-        <div>Total Job Applications: <span className="text-indigo-500"> {totalJobs} </span> </div>
-        {statusFilter !== "all" && (
-          <div>Filtered: <span className="text-indigo-500"> {filteredCount} </span> </div>
-        )}
-      </div>
+    {/* Footer */}
+    <div className="fixed z-0 bottom-0 left-0 w-full bg-gray-900/90 text-gray-400 text-xs py-2 flex justify-center gap-4">
+      <a href="/terms" className="hover:text-white underline">Terms of Service</a>
+      <a href="/privacy" className="hover:text-white underline">Privacy Policy</a>
+    </div>
 
-      
-      <div className="fixed bottom-4 left-6 bg-gray-800/70 px-4 py-2 rounded-md text-sm">
-        Auto logout in: <span className="font-bold text-red-400">{formatTime(timeLeft)}</span>
-      </div>
+    {/* Job counts */}
+    <div className="fixed bottom-10 right-6 z-10 text-gray-200 px-4 py-2 rounded-lg shadow-md text-sm">
+      <div>Total Job Applications: <span className="text-indigo-500">{totalJobs}</span></div>
+      {statusFilter !== "all" && (
+        <div>Filtered: <span className="text-indigo-500">{filteredCount}</span></div>
+      )}
+    </div>
+
+    {/* Auto logout timer */}
+    <div className="fixed bottom-10 left-6 z-10 bg-gray-800/70 px-4 py-2 rounded-md text-sm">
+      Auto logout in: <span className="font-bold text-red-400">{formatTime(timeLeft)}</span>
+    </div>
+
+
 
 
       {/* Modals */}

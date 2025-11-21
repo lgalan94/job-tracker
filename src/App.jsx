@@ -8,6 +8,8 @@ import Register from "./pages/Register";
 import PrivateRoute from "./components/PrivateRoute";
 import AuthSuccess from "./pages/AuthSuccess";
 import Landing from "./pages/Landing";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 
 const App = () => {
   return (
@@ -17,6 +19,9 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/auth/success" element={<AuthSuccess />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+
         <Route path="/" element={<Landing />} />
         {/* Protected Routes */}
         <Route

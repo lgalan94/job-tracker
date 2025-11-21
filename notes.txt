@@ -19,13 +19,13 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("lastActivity", Date.now());
   };
 
-  const logout = (msg = "") => {
+  const logout = (reason = "") => {
     setUser(null);
     localStorage.removeItem("auth");
     localStorage.removeItem("lastActivity");
 
-    if (msg) {
-      toast.info(msg);
+    if (reason) {
+      toast.error(reason);
     }
   };
 
@@ -136,7 +136,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         loading,
-        timeLeft,
+        timeLeft, // ⏱ Expose timer
       }}
     >
       {children}

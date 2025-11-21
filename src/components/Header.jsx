@@ -43,7 +43,7 @@ const Header = ({ user, onAddNew, onLogout }) => {
           {user && (
             <Button
               variant="ghost"
-              onClick={onLogout}
+              onClick={() => onLogout("You have successfully logged out")}
               className="p-2 hover:bg-red-600 hover:text-white hover:scale-110 transition-colors"
             >
               <LogOut size={18} />
@@ -63,7 +63,7 @@ const Header = ({ user, onAddNew, onLogout }) => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={onLogout}
+              onClick={() => onLogout("You have successfully logged out")}
               className="p-2 hover:bg-red-600 hover:text-white transition-colors"
             >
               <LogOut size={16} />
