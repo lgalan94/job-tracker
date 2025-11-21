@@ -6,7 +6,7 @@ import { WarningIcon } from "./icons/WarningIcon";
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message, loading = false }) => {
   return (
     <Dialog open={isOpen} onOpenChange={val => !val && onClose()}> 
-      <DialogContent className="sm:max-w-md">as
+      <DialogContent className="sm:max-w-md">
         <DialogHeader className="flex items-start gap-4">
           <div className="shrink-0">
             <div className="h-12 w-12 rounded-full bg-red-500/20 flex items-center justify-center">
@@ -14,8 +14,8 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message, loading
             </div>
           </div>
           <div className="grow">
-            <DialogTitle className="text-xl font-bold text-gray-100">{title}</DialogTitle>
-            <p className="mt-2 text-gray-400">{message}</p>
+            <DialogTitle className="text-xl font-bold text-gray-800">{title}</DialogTitle>
+            <p className="mt-2 text-gray-600">{message}</p>
           </div>
         </DialogHeader>
 
