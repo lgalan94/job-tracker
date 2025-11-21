@@ -56,7 +56,7 @@ export default function Login() {
 
         {/* GOOGLE LOGIN ONLY */}
         <a
-          href={`${import.meta.env.VITE_API_URL}/auth/google`}
+          href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_GOOGLE_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_FRONTEND_URL}/auth/callback&response_type=token&scope=email profile`}
           onClick={() => setLoadingGoogle(true)}
           className={`w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition-all text-white py-3 rounded-lg font-semibold ${
             loadingGoogle ? "opacity-70 cursor-not-allowed" : ""
