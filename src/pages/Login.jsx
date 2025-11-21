@@ -56,7 +56,7 @@ export default function Login() {
 
         {/* GOOGLE LOGIN ONLY */}
         <a
-          href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_GOOGLE_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_FRONTEND_URL}/auth/callback&response_type=token&scope=email profile`}
+          href={`${import.meta.env.VITE_API_URL}/auth/google`}
           onClick={() => setLoadingGoogle(true)}
           className={`w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition-all text-white py-3 rounded-lg font-semibold ${
             loadingGoogle ? "opacity-70 cursor-not-allowed" : ""
@@ -76,22 +76,8 @@ export default function Login() {
           )}
         </a>
 
-        {/* TERMS & PRIVACY */}
-        <div className="mt-4 text-gray-400 text-xs flex flex-col gap-1">
-          <p>
-            By continuing, you agree to our{" "}
-            <a href="/terms" className="underline hover:text-white">
-              Terms of Service
-            </a>{" "}
-            and{" "}
-            <a href="/privacy" className="underline hover:text-white">
-              Privacy Policy
-            </a>.
-          </p>
-        </div>
-
         {/* FOOTER CREDITS */}
-        <p className="mt-6 text-gray-500 text-xs tracking-wide">
+        <p className="mt-8 text-gray-500 text-xs tracking-wide">
           © Lito Galan Jr
         </p>
       </div>
