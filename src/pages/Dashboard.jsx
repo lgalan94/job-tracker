@@ -16,7 +16,7 @@ import { fetchJobs, createJob, updateJob, deleteJob } from "../api/jobsApi";
 import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
-  const { user, token, logout } = useAuth();
+  const { user, token, logout, timeLeft } = useAuth();
 
   const [jobs, setJobs] = useState([]);
   const [loadingJobs, setLoadingJobs] = useState(false);
@@ -133,6 +133,13 @@ const Dashboard = () => {
       setJobs(prev => prev.map(j => (j._id === draggableId ? job : j)));
     }
   };
+
+  const formatTime = (time) => {
+  const hours = String(Math.floor(time / 3600)).padStart(2, "0");
+  const minutes = String(Math.floor((time % 3600) / 60)).padStart(2, "0");
+  const seconds = String(time % 60).padStart(2, "0");
+  return `${hours}:${minutes}:${seconds}`;
+};
 
   return (
     <div className="min-h-screen w-full bg-gray-900 text-gray-100 font-sans">
@@ -254,6 +261,10 @@ const Dashboard = () => {
       </div>
 
       
+      <div className="fixed bottom-4 left-6 bg-gray-800/70 px-4 py-2 rounded-md text-sm">
+        Auto logout in: <span className="font-bold text-red-400">{formatTime(timeLeft)}</span>
+      </div>
+
 
       {/* Modals */}
       {isAddEditModalOpen && (
