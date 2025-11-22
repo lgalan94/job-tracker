@@ -149,12 +149,11 @@ const Dashboard = () => {
         <Header user={user} onAddNew={handleAddNew} onLogout={logout} />
 
         {/* View Mode & Filter */}
-        {/* View Mode & Filter */}
         <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center my-4 flex-wrap gap-2">
-          <div className="flex gap-2 justify-center sm:justify-start w-full sm:w-auto">
+          <div className="flex gap-2 mb-6 justify-center sm:justify-start w-full sm:w-auto">
             <Button
-              className={` ${
-                viewMode === "table" ? "text-black py-0" : "hover:scale-110"
+              className={`rounded-2xl bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 transition-all ${
+                viewMode === "table" ? "text-gray-300 border" : "hover:scale-110 hover:text-amber-50"
               }`}
               onClick={() => setViewMode("table")}
               variant={viewMode === "table" ? "secondary" : "ghost"}
@@ -162,8 +161,8 @@ const Dashboard = () => {
               Table View
             </Button>
             <Button
-              className={`px-2 py-1 text-sm sm:px-4 sm:py-2 ${
-                viewMode === "kanban" ? "text-black" : "hover:scale-110"
+              className={`rounded-2xl bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 transition-all ${
+                viewMode === "kanban" ? "text-gray-300 border" : "hover:scale-110 hover:text-amber-50"
               }`}
               onClick={() => setViewMode("kanban")}
               variant={viewMode === "kanban" ? "secondary" : "ghost"}

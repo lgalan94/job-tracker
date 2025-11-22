@@ -32,7 +32,7 @@ const Landing = () => {
 
               <Link
                 to="/dashboard"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold"
+                className="rounded-lg px-4 py-2 bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 transition-all text-white bg-gray-700 font-semibold"
               >
                 Dashboard
               </Link>
@@ -40,7 +40,7 @@ const Landing = () => {
           ) : (
             <Link
               to="/login"
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold"
+              className="rounded-lg px-4 py-2 bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 transition-all text-white bg-gray-700 font-semibold"
             >
               Login
             </Link>
@@ -62,7 +62,7 @@ const Landing = () => {
             {/* Google */}
             <a
               href={`${import.meta.env.VITE_API_URL}/auth/google`}
-              className="flex items-center gap-3 px-8 py-4 bg-gray-800 text-white rounded-xl font-semibold shadow-md hover:bg-gray-700 transition-all"
+              className="flex items-center gap-3 px-8 py-4 bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white rounded-xl font-semibold shadow-md hover:bg-gray-700 transition-all"
             >
               <span className="flex items-center justify-center w-10 h-10 bg-gray-700 rounded-full shadow-sm">
                 <img
@@ -73,11 +73,12 @@ const Landing = () => {
               </span>
               Continue with Google
             </a>
+            
 
             {/* GitHub */}
             <a
               href={`${import.meta.env.VITE_API_URL}/auth/github`}
-              className="flex items-center gap-3 px-8 py-4 bg-gray-800 text-white rounded-xl font-semibold shadow-md hover:bg-gray-700 transition-all"
+              className="flex items-center gap-3 px-8 py-4 bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white rounded-xl font-semibold shadow-md hover:bg-gray-700 transition-all"
             >
               <span className="flex items-center justify-center w-10 h-10 bg-gray-700 rounded-full shadow-sm">
                 <img

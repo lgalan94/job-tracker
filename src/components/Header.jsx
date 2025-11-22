@@ -42,7 +42,7 @@ const Header = ({ user, onAddNew, onLogout }) => {
 
           <Button
             onClick={onAddNew}
-            className="flex items-center gap-2 rounded-2xl hover:scale-110"
+            className="flex items-center gap-2 rounded-2xl px-4 py-2 bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 transition-all text-white bg-gray-700 font-semibold"
             variant="secondary"
           >
             <PlusIcon />
@@ -84,7 +84,7 @@ const Header = ({ user, onAddNew, onLogout }) => {
 
           <SheetContent
             side="left"
-            className="w-64 bg-gray-900 p-6 gap-6 flex flex-col"
+            className="w-64 bg-gray-900 p-6 gap-6 flex flex-col border-none"
           >
             {/* Profile */}
             {user && (
@@ -103,7 +103,7 @@ const Header = ({ user, onAddNew, onLogout }) => {
             {/* Add New */}
             <Button
               onClick={onAddNew}
-              className="flex items-center gap-2 rounded-lg w-full justify-start hover:bg-gray-700"
+              className="flex items-center gap-2 rounded-lg px-4 py-2 bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 transition-all text-white bg-gray-700 font-semibold"
               variant="secondary"
             >
               <PlusIcon />
