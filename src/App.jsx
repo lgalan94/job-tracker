@@ -10,6 +10,7 @@ import AuthSuccess from "./pages/AuthSuccess";
 import Landing from "./pages/Landing";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import DataDeletionInstructions from "./pages/DataDeletion";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/auth/success" element={<AuthSuccess />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/data-deletion-instructions" element={<DataDeletionInstructions />} />
 
         <Route path="/" element={<Landing />} />
         {/* Protected Routes */}

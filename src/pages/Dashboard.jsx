@@ -145,30 +145,34 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen w-full bg-gray-900 text-gray-100 font-sans">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4">
         <Header user={user} onAddNew={handleAddNew} onLogout={logout} />
 
         {/* View Mode & Filter */}
-        <div className="flex justify-between items-center my-4 flex-wrap gap-2">
-          <div className="flex gap-2">
+        {/* View Mode & Filter */}
+        <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center my-4 flex-wrap gap-2">
+          <div className="flex gap-2 justify-center sm:justify-start w-full sm:w-auto">
             <Button
-              className={viewMode === "table" ? "text-black" : "hover:scale-110"}
+              className={` ${
+                viewMode === "table" ? "text-black py-0" : "hover:scale-110"
+              }`}
               onClick={() => setViewMode("table")}
               variant={viewMode === "table" ? "secondary" : "ghost"}
             >
               Table View
             </Button>
             <Button
-              className={viewMode === "kanban" ? "text-black" : "hover:scale-110"}
+              className={`px-2 py-1 text-sm sm:px-4 sm:py-2 ${
+                viewMode === "kanban" ? "text-black" : "hover:scale-110"
+              }`}
               onClick={() => setViewMode("kanban")}
               variant={viewMode === "kanban" ? "secondary" : "ghost"}
             >
               Kanban View
             </Button>
           </div>
-          
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 justify-center sm:justify-end w-full sm:w-auto">
             <label className="text-sm font-medium text-gray-400 mr-2">Filter by status:</label>
             <select
               value={statusFilter}
@@ -262,17 +266,17 @@ const Dashboard = () => {
     </div>
 
     {/* Job counts */}
-    <div className="fixed bottom-10 right-6 z-10 text-gray-200 px-4 py-2 rounded-lg shadow-md text-sm">
+    {/* <div className="fixed bottom-10 right-6 z-10 text-gray-200 px-4 py-2 rounded-lg shadow-md text-sm">
       <div>Total Job Applications: <span className="text-indigo-500">{totalJobs}</span></div>
       {statusFilter !== "all" && (
         <div>Filtered: <span className="text-indigo-500">{filteredCount}</span></div>
       )}
-    </div>
+    </div> */}
 
     {/* Auto logout timer */}
-    <div className="fixed bottom-10 left-6 z-10 bg-gray-800/70 px-4 py-2 rounded-md text-sm">
+   {/*  <div className="fixed bottom-10 left-6 z-10 bg-gray-800/70 px-4 py-2 rounded-md text-sm">
       Auto logout in: <span className="font-bold text-red-400">{formatTime(timeLeft)}</span>
-    </div>
+    </div> */}
 
 
 
