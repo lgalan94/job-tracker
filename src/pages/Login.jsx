@@ -84,7 +84,7 @@ export default function Login() {
         </a>
 
         {/* GITHUB LOGIN */}
-        <a
+        {/*  <a
           href={`${import.meta.env.VITE_API_URL}/auth/github`}
           onClick={() => setLoadingGitHub(true)}
           className={`mt-4 w-full flex items-center justify-center gap-3 py-3 rounded-xl bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 transition-all text-white font-semibold shadow-lg ${
@@ -105,7 +105,7 @@ export default function Login() {
                GitHub
             </>
           )}
-        </a>
+        </a> */}
 
 
         {/* TERMS & PRIVACY */}
